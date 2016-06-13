@@ -5,10 +5,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import by.epam.authorization.command.Command;
 import by.epam.authorization.command.CommandName;
+import by.epam.authorization.command.impl.ADeclarationConfirm;
+import by.epam.authorization.command.impl.ADeclarationDecline;
+import by.epam.authorization.command.impl.ANewDeclarationsReview;
+import by.epam.authorization.command.impl.ARegistration;
+import by.epam.authorization.command.impl.AShowDeclarationCommand;
 import by.epam.authorization.command.impl.AUserConfirmCommand;
 import by.epam.authorization.command.impl.AUserDeclineCommand;
 import by.epam.authorization.command.impl.AUserReviewCommand;
 import by.epam.authorization.command.impl.AddNewGoodCommand;
+import by.epam.authorization.command.impl.AdminPageCommand;
 import by.epam.authorization.command.impl.ChangeNewGoodCommand;
 import by.epam.authorization.command.impl.CreateDeclarationChangesCommand;
 import by.epam.authorization.command.impl.CreateNewDeclarationCommand;
@@ -18,6 +24,7 @@ import by.epam.authorization.command.impl.ExportDeclarationCheckCommand;
 import by.epam.authorization.command.impl.LocalizationCommand;
 import by.epam.authorization.command.impl.LogOutCommand;
 import by.epam.authorization.command.impl.LoginCommand;
+import by.epam.authorization.command.impl.NoSuchCommand;
 import by.epam.authorization.command.impl.RegistrationCommand;
 import by.epam.authorization.command.impl.RestoreCommand;
 import by.epam.authorization.command.impl.ShowAllDeclarations;
@@ -54,6 +61,13 @@ public final class CommandHelper {
 		commands.put(CommandName.A_USER_REVIEW, new AUserReviewCommand());
 		commands.put(CommandName.A_USER_CONFIRM, new AUserConfirmCommand());
 		commands.put(CommandName.A_USER_DECLINE, new AUserDeclineCommand());
+		commands.put(CommandName.A_SHOW_DECLARATION, new AShowDeclarationCommand());
+		commands.put(CommandName.ADMIN_PAGE, new AdminPageCommand());
+		commands.put(CommandName.A_NEW_DECLARATIONS_REVIEW, new ANewDeclarationsReview());
+		commands.put(CommandName.A_DECLARATION_CONFIRM, new ADeclarationConfirm());
+		commands.put(CommandName.A_DECLARATION_DECLINE, new ADeclarationDecline());
+		commands.put(CommandName.A_REGISTRATION, new ARegistration());
+		commands.put(CommandName.NO_SUCH_COMMAND, new NoSuchCommand());
 	}
 	
 	public static CommandHelper getCommandHelperInstance(){

@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="mytag" uri="WEB-INF/tlds/LogoTag.tld"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -16,7 +17,10 @@
 <fmt:message bundle="${loc}" key="local.leftcol.menu" var="menu"/>
 <fmt:message bundle="${loc}" key="local.topbar.usual" var="head"/>
 <fmt:message bundle="${loc}" key="local.content.about" var="about_Ecust"/>
-<link rel="stylesheet" href="Resources\css\about.css">
+<fmt:message bundle="${loc}" key="local.content.about1" var="about_Ecust1"/>
+<fmt:message bundle="${loc}" key="local.content.about2" var="about_Ecust2"/>
+<fmt:message bundle="${loc}" key="local.content.about3" var="about_Ecust3"/>
+<link rel="stylesheet" href="${pageContext.request.contextPath}\Resources\css\registration.css">
 </head>
 <body>
 <div class="container">
@@ -40,13 +44,19 @@
 	         </form>
           </div>
           <div id="content">
-		    ${about_Ecust}
+		    <h2>${about_Ecust}</h2>
+			<p>${about_Ecust1}</p>
+			<p>${about_Ecust2}</p>
+			<p>${about_Ecust3}</p>
 		  </div>
           <div id="rightcol">
 		  </div>
         </div>
     </div>
   </div>
+ </div>
+ <div id = "footer">
+   <h2><mytag:img url="Resources\img\wcologo.gif" showBorder="true"/> E-cust Service. All rights reserved 2016</h2>
  </div>
 </div>
 </body>

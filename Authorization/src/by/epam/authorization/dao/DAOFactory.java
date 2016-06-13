@@ -3,7 +3,7 @@ package by.epam.authorization.dao;
 import java.util.HashMap;
 import java.util.Map;
 
-import by.epam.authorization.dao.con_pool.impl.ConnectionPool;
+import by.epam.authorization.dao.conpool.impl.ConnectionPool;
 import by.epam.authorization.dao.impl.DeclarationDAO;
 import by.epam.authorization.dao.impl.InformDAO;
 import by.epam.authorization.dao.impl.UserDAO;

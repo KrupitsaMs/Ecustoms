@@ -16,7 +16,7 @@ public class RegistrationCommand implements Command{
 	private static final String UTN = "newUTN";
 	private static final String ORGANIZATION_NAME = "newOrgName";
 	private static final String ORGANIZATION_ADDRESS = "newAddres";
-	private static final String Mail = "newMail";
+	private static final String MAIL = "newMail";
 	
 	@Override
 	public String execute(HttpServletRequest request) throws CommandException{
@@ -24,7 +24,7 @@ public class RegistrationCommand implements Command{
 		try {
 			UserService service = ServiceFactory.getServiceFactory().getUserService(ServiceName.REGISTRATION);
 			User user = service.userEnquery(request.getParameter(LOGIN), request.getParameter(PASSWORD), request.getParameter(UTN),
-					request.getParameter(ORGANIZATION_NAME), request.getParameter(ORGANIZATION_ADDRESS), request.getParameter(Mail));
+					request.getParameter(ORGANIZATION_NAME), request.getParameter(ORGANIZATION_ADDRESS), request.getParameter(MAIL));
 			if (user != null){	
 				page = PageName.REGISTRATION_APPLICATION;
 			}else{

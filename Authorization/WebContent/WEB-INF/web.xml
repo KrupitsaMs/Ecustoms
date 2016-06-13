@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+		 version="2.5">
   <display-name>Library</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -21,4 +24,33 @@
     <servlet-name>Controller</servlet-name>
     <url-pattern>/Controller</url-pattern>
   </servlet-mapping>
+  
+   <listener>
+      <listener-class>by.epam.authorization.controller.listner.SessionCreaterListener</listener-class>
+   </listener>
+  
+  <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>by.epam.authorization.controller.filter.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+   </filter>
+   
+   <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	
+	<filter>
+        <filter-name>AccessFilter</filter-name>
+        <filter-class>by.epam.authorization.controller.filter.AccessFilter</filter-class>
+    </filter>
+	
+	<filter-mapping>
+        <filter-name>AccessFilter</filter-name>
+        <url-pattern>/Controller</url-pattern>
+    </filter-mapping>
+	
 </web-app>

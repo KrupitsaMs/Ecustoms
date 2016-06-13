@@ -13,7 +13,7 @@ import by.epam.authorization.service.exception.ServiceException;
 
 public class AUserDeclineCommand implements Command{
 	private static final String NOT_EXAMINED_USER = "not_examined_user";
-	private static final String STATUS = "reject";
+	private static final String STATUS = "rejected";
 	@Override
 	public String execute(HttpServletRequest request) throws CommandException {
 		String page;

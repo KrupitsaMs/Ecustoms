@@ -1,10 +1,11 @@
 package by.epam.authorization.service.impl;
 
 import java.util.ArrayList;
+
 import by.epam.authorization.dao.DAODecl;
 import by.epam.authorization.dao.DAOFactory;
 import by.epam.authorization.dao.DAOName;
-import by.epam.authorization.dao.con_pool.exception.ConnectionPoolException;
+import by.epam.authorization.dao.conpool.exception.ConnectionPoolException;
 import by.epam.authorization.entity.Declaration;
 import by.epam.authorization.service.DeclService;
 import by.epam.authorization.service.exception.ServiceException;
@@ -64,5 +65,32 @@ public class DeclarationSubmissionService implements DeclService{
 			throws ServiceException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+
+	@Override
+	public Declaration adminDeclarationRequest(String declNumber)
+			throws ServiceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public ArrayList<Declaration> adminDeclarationListRequest(String status)
+			throws ServiceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	@Override
+	public void declarationStatusChange(String declNumber, String status)
+			throws ServiceException {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -2,6 +2,8 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="mytag" uri="WEB-INF/tlds/LogoTag.tld"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -60,7 +62,7 @@
 	          <div>
 	            <form class="ru" action="Controller" method="post">
 		          <input type="hidden" name="command" value="ru" /> 
-		          <input id="button" type="submit" value="${ru_button}"/>
+		          <input id="ru" type="submit" value="${ru_button}"/>
 	            </form>
 	            <form class="en" action="Controller" method="post">
 		          <input type="hidden" name="command" value="en" /> 
@@ -71,6 +73,9 @@
         </div>
     </div>
   </div>
+ </div>
+ <div id = "footer">
+   <h2><mytag:img url="Resources\img\wcologo.gif" showBorder="true"/> E-cust Service. All rights reserved 2016</h2>
  </div>
 </div>
 </body>

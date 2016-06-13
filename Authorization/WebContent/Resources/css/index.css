@@ -1,4 +1,4 @@
-html {
+﻿html {
   background: lightgrey;
   min-height: 100%;
   background-image: url(images/Kadytsei2.png);
@@ -119,6 +119,37 @@ html {
 #button:hover{
   background-color: #ff3434;
 }
+#ru{
+  background: #ffffff;
+  border: 2px solid #eee;
+  height: 38px;
+  width: 125px;
+  overflow: hidden;
+  text-align: center;
+  /*Скругленные углы*/
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  /*Градиент*/
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  /*Тень*/
+  -webkit-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.2);
+  /*Переход*/
+  -webkit-transition: All 0.5s ease;
+  -moz-transition: All 0.5s ease;
+  -o-transition: All 0.5s ease;
+  -ms-transition: All 0.5s ease;
+  transition: All 0.5s ease;
+}
+#ru:hover{
+  background-color: blue;
+}
 #rightcol {
   float: left;
   width: 25%;
@@ -137,6 +168,7 @@ float: left;;
 width: 35%;
 }
 h1{
+	color:white;
 	margin: 0;
 }
 a{
@@ -146,3 +178,18 @@ a{
 a:hover{
   color: #ff3434;
 }
+#footer{
+    background:white;
+    text-align: center;
+    width:100%;
+    height:10%;
+    position:absolute;
+    bottom:0;
+    left:0;
+}
+h2{
+	color:#FF9500;
+	}
+ h3{
+	color:black;
+ }

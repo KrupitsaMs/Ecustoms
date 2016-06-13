@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="mytag" uri="LogoTag.tld"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -56,7 +57,8 @@
 		        <input id="cont_button" type="submit" value="${a_user_review}" />
 	        </form>
 			<form action="Controller" method="post">
-				<input type="hidden" name="command" value="a_show_declaration" />
+				<input type="hidden" name="command" value="admin_page" />
+				<input type="hidden" name="button" value="a_show_declaration" />
 		        <input id="cont_button" type="submit" value="${a_show_declaration}" />
 	        </form>
 			<form action="Controller" method="post">
@@ -64,7 +66,8 @@
 		        <input id="cont_button" type="submit" value="${a_new_declarations_review}" />
 	         </form>
 			 <form action="Controller" method="post">
-				<input type="hidden" name="command" value="a_registration" />
+				<input type="hidden" name="command" value="admin_page" />
+				<input type="hidden" name="button" value="a_registration" />
 		        <input id="cont_button" type="submit" value="${a_registration}" />
 	         </form>
           </div>
@@ -138,6 +141,9 @@
         </div>
     </div>
   </div>
+ </div>
+ <div id = "footer">
+   <h2><mytag:img url="Resources\img\wcologo.gif" showBorder="true"/> E-cust Service. All rights reserved 2016</h2>
  </div>
 </div>
 </body>

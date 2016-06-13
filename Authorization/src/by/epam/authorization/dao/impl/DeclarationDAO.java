@@ -7,13 +7,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import by.epam.authorization.dao.DAODecl;
-import by.epam.authorization.dao.con_pool.exception.ConnectionPoolException;
-import by.epam.authorization.dao.con_pool.impl.ConnectionPool;
+import by.epam.authorization.dao.conpool.exception.ConnectionPoolException;
+import by.epam.authorization.dao.conpool.impl.ConnectionPool;
 import by.epam.authorization.entity.Declaration;
 import by.epam.authorization.entity.Good;
 
 public class DeclarationDAO implements DAODecl{
 	private final static String SQL_EXPORT_DECLARATION_CHECK = "SELECT * FROM ecustoms.declarations WHERE Registration_number = ? AND declaration_type = 'EX'";
+	private final static String SQL_ADMIN_DECLARATION_REQUEST = "SELECT * FROM ecustoms.declarations WHERE Registration_number = ?";
+	private final static String SQL_ADMIN_DECLARATION_LIST_REQUEST = "SELECT * FROM ecustoms.declarations WHERE Confirmation = ?";
 	private final static String SQL_STATUS_CHECK = "SELECT * FROM ecustoms.declarations WHERE Registration_number = ? AND Confirmation = 'Confirmed'";
 	private final static String SQL_DECLARATION_CHECK = "SELECT * FROM ecustoms.declarations WHERE Registration_number = ?";
 	private final static String SQL_DECLARATION_SUBMISSION = "INSERT INTO ecustoms.declarations (Registration_number, declaration_type, UTN, Trade_country) VALUES (?,?,?,?)";
@@ -22,6 +24,7 @@ public class DeclarationDAO implements DAODecl{
 	private final static String SQL_USER_DECLARATION = "SELECT Registration_number, declaration_type, Trade_country, Confirmation FROM ecustoms.declarations WHERE UTN = ?";
 	private final static String SQL_DECLARATION_GOOD = "SELECT * FROM ecustoms.declaration_goods WHERE Registration_number = ?";
 	private final static String SQL_CHANGING_DECLARATION = "UPDATE ecustoms.declarations set declaration_type = ?, Trade_country = ?, Confirmation = ?  WHERE Registration_number = ?";
+	private final static String SQL_CHANGING_DECLARATION_STATUS = "UPDATE ecustoms.declarations set Confirmation = ?  WHERE Registration_number = ?";
 	private final static String CONFIRMED ="Confirmed";
 	private final static String NOT_YET_EXAMINED ="not yet examined";
 	private final static String UTN ="UTN";
@@ -270,6 +273,7 @@ public class DeclarationDAO implements DAODecl{
 				currentDecl.setDeclarationGoods(goodList);
 				declList.set(goodNumber-1, currentDecl);
 			}
+			con.returnConnection(connection);
 			return declList;
 		} catch (SQLException ex){
             throw new ConnectionPoolException("SQL exception in DeclarationDao", ex);
@@ -280,6 +284,147 @@ public class DeclarationDAO implements DAODecl{
 				}
 				if(rs!=null){
 					rs.close();
+				}
+			} catch(SQLException sqlee) {
+	            sqlee.printStackTrace();
+	        }
+		}
+		
+	}
+
+	@SuppressWarnings("resource")
+	@Override
+	public Declaration adminDeclarationRequest(String declNumber) throws ConnectionPoolException {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ConnectionPool con = ConnectionPool.getInstance();
+			connection = con.takeConnection();
+			ps = connection.prepareStatement(SQL_ADMIN_DECLARATION_REQUEST);
+			ps.setString(1, declNumber);
+			rs = ps.executeQuery();
+			if (rs.next()){
+				Declaration declaration = new Declaration();
+				declaration.setNumber(declNumber);
+				declaration.setType(rs.getString(2));
+				declaration.setUTN(rs.getString(3));
+				declaration.setTrade_country(rs.getString(4));
+				declaration.setStatus(rs.getString(5));
+				ArrayList<Good> goodList = new ArrayList<Good>();
+				ps = connection.prepareStatement(SQL_DECLARATION_GOOD);
+				ps.setString(1, declNumber);
+				rs = ps.executeQuery();
+				while (rs.next()){
+					  Good currentGood = new Good();
+					  currentGood.setDeclarationNumber(rs.getString(1));
+					  currentGood.setNumber(rs.getString(2));
+					  currentGood.setTariffCode(rs.getString(3));
+					  currentGood.setName(rs.getString(4));
+					  currentGood.setValue(rs.getString(5));
+					  currentGood.setCurrency(rs.getString(6));
+					  currentGood.setOrigin(rs.getString(7));
+					  goodList.add(currentGood);
+				}
+				declaration.setDeclarationGoods(goodList);
+				con.returnConnection(connection);
+				return declaration;
+			} else {
+				return null;
+			}
+		} catch (SQLException ex){
+            throw new ConnectionPoolException("SQL exception in DeclarationDao", ex);
+		} finally{
+			try{
+				if(ps!=null){
+					ps.close();
+				}
+				if(rs!=null){
+					rs.close();
+				}
+			} catch(SQLException sqlee) {
+	            sqlee.printStackTrace();
+	        }
+		}
+	}
+
+	@Override
+	public ArrayList<Declaration> adminDeclarationListRequest(String status) throws ConnectionPoolException {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ArrayList <Declaration> declList = new ArrayList<Declaration>();
+			ConnectionPool con = ConnectionPool.getInstance();
+			connection = con.takeConnection();
+			ps = connection.prepareStatement(SQL_ADMIN_DECLARATION_LIST_REQUEST);
+			ps.setString(1, status);
+			rs = ps.executeQuery();
+			while (rs.next()){
+				Declaration declaration = new Declaration();
+				declaration.setNumber(rs.getString(1));
+				declaration.setType(rs.getString(2));
+				declaration.setUTN(rs.getString(3));
+				declaration.setTrade_country(rs.getString(4));
+				declaration.setStatus(status);
+				declList.add(declaration);
+			}
+			for(int goodNumber=1; goodNumber<=declList.size();goodNumber++){
+				Declaration currentDecl = declList.get(goodNumber-1);
+				ArrayList<Good> goodList = new ArrayList<Good>();
+				ps = connection.prepareStatement(SQL_DECLARATION_GOOD);
+				ps.setString(1, currentDecl.getNumber());
+				rs = ps.executeQuery();
+				while (rs.next()){
+					  Good currentGood = new Good();
+					  currentGood.setDeclarationNumber(rs.getString(1));
+					  currentGood.setNumber(rs.getString(2));
+					  currentGood.setTariffCode(rs.getString(3));
+					  currentGood.setName(rs.getString(4));
+					  currentGood.setValue(rs.getString(5));
+					  currentGood.setCurrency(rs.getString(6));
+					  currentGood.setOrigin(rs.getString(7));
+					  goodList.add(currentGood);
+				}
+				currentDecl.setDeclarationGoods(goodList);
+				declList.set(goodNumber-1, currentDecl);
+			}
+			con.returnConnection(connection);
+			return declList;
+		} catch (SQLException ex){
+            throw new ConnectionPoolException("SQL exception in DeclarationDao", ex);
+		} finally{
+			try{
+				if(ps!=null){
+					ps.close();
+				}
+				if(rs!=null){
+					rs.close();
+				}
+			} catch(SQLException sqlee) {
+	            sqlee.printStackTrace();
+	        }
+		}
+	}
+
+	@Override
+	public void declarationStatusChange(String declNumber, String status) throws ConnectionPoolException {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		try {
+			ConnectionPool con = ConnectionPool.getInstance();
+			connection = con.takeConnection();
+			ps = connection.prepareStatement(SQL_CHANGING_DECLARATION_STATUS);
+			ps.setString(1, status);
+			ps.setString(2, declNumber);
+			ps.executeUpdate();
+			con.returnConnection(connection);
+		} catch (SQLException ex){
+            throw new ConnectionPoolException("SQL exception in DeclarationDao", ex);
+		} finally{
+			try{
+				if(ps!=null){
+					ps.close();
 				}
 			} catch(SQLException sqlee) {
 	            sqlee.printStackTrace();

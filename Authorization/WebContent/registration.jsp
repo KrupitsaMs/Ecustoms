@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="mytag" uri="WEB-INF/tlds/LogoTag.tld"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,7 +31,7 @@
 <fmt:message bundle="${loc}" key="local.registration.utn_condition" var="utn_condition"/>
 <fmt:message bundle="${loc}" key="local.registration.org_name_condition" var="org_name_condition"/>
 <fmt:message bundle="${loc}" key="local.registration.addres_condition" var="addres_condition"/>
-<link rel="stylesheet" href="Resources\css\registration.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}\Resources\css\registration.css">
 </head>
 <body>
 <div class="container">
@@ -81,6 +82,9 @@
         </div>
     </div>
   </div>
+ </div>
+ <div id = "footer">
+   <h2><mytag:img url="Resources\img\wcologo.gif" showBorder="true"/> E-cust Service. All rights reserved 2016</h2>
  </div>
 </div>
 </body>

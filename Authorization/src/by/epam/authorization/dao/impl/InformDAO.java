@@ -6,15 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import by.epam.authorization.dao.DAOInform;
-import by.epam.authorization.dao.con_pool.exception.ConnectionPoolException;
-import by.epam.authorization.dao.con_pool.impl.ConnectionPool;
+import by.epam.authorization.dao.conpool.exception.ConnectionPoolException;
+import by.epam.authorization.dao.conpool.impl.ConnectionPool;
 
 public class InformDAO implements DAOInform{
 	private final static String SQL_LOGINING = "SELECT * FROM ecustoms.users WHERE Mail = ?";
 	private final static String SQL_MAX_DECL_NUMBER = "SELECT MAX(Registration_number) AS 'Number' FROM ecustoms.declarations";
 	private final static String MAIL_CONFIRMATION = "Confirmed";
 	private final static String NUMBER = "Number";
-	private final static String MIN_NUMBER = "1";
+	private final static String MIN_NUMBER = "0";
 	
 	@Override
 	public String mailCheck(String mail) throws ConnectionPoolException {
@@ -44,7 +44,7 @@ public class InformDAO implements DAOInform{
 					rs.close();
 				}
 			} catch(SQLException sqlee) {
-	            sqlee.printStackTrace();
+				throw new ConnectionPoolException("SQL exception in userDao", sqlee);
 	        }
 		}
 	}
@@ -76,7 +76,7 @@ public class InformDAO implements DAOInform{
 					rs.close();
 				}
 			} catch(SQLException sqlee) {
-	            sqlee.printStackTrace();
+				throw new ConnectionPoolException("SQL exception in userDao", sqlee);
 	        }
 		}
 	}

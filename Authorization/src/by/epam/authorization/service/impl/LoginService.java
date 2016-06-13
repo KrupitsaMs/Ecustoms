@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import by.epam.authorization.dao.DAOFactory;
 import by.epam.authorization.dao.DAOName;
 import by.epam.authorization.dao.DAOUser;
-import by.epam.authorization.dao.con_pool.exception.ConnectionPoolException;
+import by.epam.authorization.dao.conpool.exception.ConnectionPoolException;
 import by.epam.authorization.entity.User;
 import by.epam.authorization.service.UserService;
 import by.epam.authorization.service.exception.ServiceException;
@@ -61,5 +61,13 @@ public class LoginService implements UserService{
 			throws ServiceException {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public User adminUserEnquery(String login, String password, String role,
+			String utn, String organizationName, String address, String mail)
+			throws ServiceException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

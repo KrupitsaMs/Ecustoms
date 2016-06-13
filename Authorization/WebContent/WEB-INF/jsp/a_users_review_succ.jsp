@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="mytag" uri="LogoTag.tld"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,8 +10,8 @@
 <title>User review successed</title>
 <fmt:setLocale value="${sessionScope.command}"/>
 <fmt:setBundle basename="resources.locale" var="loc" />
-<fmt:message bundle="${loc}" key="local.content.a_user_status" var="a_user_status"/>
-<fmt:message bundle="${loc}" key="local.content.a_user_status_succ" var="a_user_status_succ"/>
+<fmt:message bundle="${loc}" key="local.content.a_user_review_status" var="a_user_review_status"/>
+<fmt:message bundle="${loc}" key="local.content.a_magic" var="a_magic"/>
 <fmt:message bundle="${loc}" key="local.leftcol.menu" var="menu"/>
 <fmt:message bundle="${loc}" key="local.topbar.usual" var="head"/>
 <fmt:message bundle="${loc}" key="local.rightcol.organization_name" var="organization_name"/>
@@ -46,7 +47,8 @@
 		        <input id="cont_button" type="submit" value="${a_user_review}" />
 	        </form>
 			<form action="Controller" method="post">
-				<input type="hidden" name="command" value="a_show_declaration" />
+				<input type="hidden" name="command" value="admin_page" />
+				<input type="hidden" name="button" value="a_show_declaration" />
 		        <input id="cont_button" type="submit" value="${a_show_declaration}" />
 	        </form>
 			<form action="Controller" method="post">
@@ -54,12 +56,13 @@
 		        <input id="cont_button" type="submit" value="${a_new_declarations_review}" />
 	         </form>
 			 <form action="Controller" method="post">
-				<input type="hidden" name="command" value="a_registration" />
+				<input type="hidden" name="command" value="admin_page" />
+				<input type="hidden" name="button" value="a_registration" />
 		        <input id="cont_button" type="submit" value="${a_registration}" />
 	         </form>
           </div>
           <div id="content">
-		    <h1>${a_user_status}<c:out value="${sessionScope.not_examined_user.organizationName}"/> ${a_user_status_succ}</h1>
+		    <h1>${a_user_review_status}<c:out value="${sessionScope.not_examined_user.organizationName}"/> ${a_magic}</h1>
 		  </div>
           <div id="rightcol">
 		    <h3 id="user_inf">${organization_name} <c:out value="${sessionScope.login.organizationName}"/></h3>
@@ -75,6 +78,9 @@
         </div>
     </div>
   </div>
+ </div>
+ <div id = "footer">
+   <h2><mytag:img url="Resources\img\wcologo.gif" showBorder="true"/> E-cust Service. All rights reserved 2016</h2>
  </div>
 </div>
 </body>

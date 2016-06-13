@@ -10,4 +10,5 @@ public interface UserService extends Service{
 	public User userEnquery(String login, String password, String utn, String organizationName, String address, String mail) throws ServiceException;
 	public ArrayList<User> userEnquery()throws ServiceException;
 	public void userStatusUpdate(User updatedUser, String status) throws ServiceException;
+	public User adminUserEnquery(String login, String password, String role, String utn, String organizationName, String address, String mail) throws ServiceException;
 }

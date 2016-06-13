@@ -21,11 +21,6 @@ public class Controller extends HttpServlet{
         super();
     }
 	
-	@Override
-    protected void service(HttpServletRequest arg0, HttpServletResponse arg1) throws ServletException, IOException {
-    	super.service(arg0, arg1);
-    }
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -44,10 +39,7 @@ public class Controller extends HttpServlet{
 		}
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher(page);
-		if (dispatcher != null){
-			dispatcher.forward(request, response);
-		}else{
-			// to do
-		}
+		dispatcher.forward(request, response);
+
 	}
 }

@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import by.epam.authorization.dao.DAOUser;
-import by.epam.authorization.dao.con_pool.exception.ConnectionPoolException;
-import by.epam.authorization.dao.con_pool.impl.ConnectionPool;
+import by.epam.authorization.dao.conpool.exception.ConnectionPoolException;
+import by.epam.authorization.dao.conpool.impl.ConnectionPool;
 import by.epam.authorization.entity.User;
 
 public class UserDAO implements DAOUser{
@@ -16,9 +16,13 @@ public class UserDAO implements DAOUser{
 	private final static String SQL_LOGIN_CHECK = "SELECT * FROM ecustoms.users WHERE Login = ?";
 	private final static String SQL_NEW_USER = "INSERT INTO ecustoms.users "
 			+ "(Login, Password, UTN, Name, Address, Mail) VALUES (?,?,?,?,?,?)";
+	private final static String SQL_ADMIN_NEW_USER = "INSERT INTO ecustoms.users "
+			+ "(Login, Password, Role, UTN, Name, Address, Confirmation, Mail) VALUES (?,?,?,?,?,?,?,?)";
 	private final static String SQL_USER_LIST = "SELECT * FROM ecustoms.users";
 	private final static String SQL_USER_UPDATE = "UPDATE ecustoms.users set Confirmation = ?  WHERE UTN = ?";
+	private final static String SQL_REMOVE_USER = "DELETE FROM ecustoms.users WHERE Login = ?";
 	
+	private final static String STATUS = "confirmed";
 	
 	@Override
 	 public User checkUser(String login, String password) throws ConnectionPoolException{
@@ -38,7 +42,10 @@ public class UserDAO implements DAOUser{
 					String organizationName = rs.getString("Name");
 					String mail = rs.getString("Mail");
 					con.returnConnection(connection);
-					return new User(login, role, UTN, organizationName, mail);
+					User currentUser = new User(login, role, UTN, organizationName, mail);
+					currentUser.setPassword(password);
+					currentUser.setStatus(STATUS);
+					return currentUser;
 				} else {
 					return null;
 				}
@@ -53,7 +60,7 @@ public class UserDAO implements DAOUser{
 						rs.close();
 					}
 				} catch(SQLException sqlee) {
-		            sqlee.printStackTrace();
+					throw new ConnectionPoolException("SQL exception in userDao", sqlee);
 		        }
 				
 			}	
@@ -99,7 +106,7 @@ public class UserDAO implements DAOUser{
 						pis.close();
 					}
 				} catch(SQLException sqlee) {
-		            sqlee.printStackTrace();
+					throw new ConnectionPoolException("SQL exception in userDao", sqlee);
 		        }
 			}
 	 }
@@ -138,7 +145,7 @@ public class UserDAO implements DAOUser{
 					rs.close();
 				}
 			} catch(SQLException sqlee) {
-	            sqlee.printStackTrace();
+				throw new ConnectionPoolException("SQL exception in userDao", sqlee);
 	        }
 	     }
 	}
@@ -162,8 +169,81 @@ public class UserDAO implements DAOUser{
 					ps.close();
 				}
 			} catch(SQLException sqlee) {
-	            sqlee.printStackTrace();
+				throw new ConnectionPoolException("SQL exception in userDao", sqlee);
 	        }
 	     }
+	}
+	@Override
+	public User adminAddNewUser(String login, String password, String role, String utn, String organizationName, String address, String mail) throws ConnectionPoolException {
+		Connection connection = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		PreparedStatement pis = null;
+		 try{
+		 	ConnectionPool con = ConnectionPool.getInstance();
+			connection = con.takeConnection();
+			ps = connection.prepareStatement(SQL_LOGIN_CHECK);
+			ps.setString(1, login);
+			rs = ps.executeQuery();
+			if (rs.next()){
+				return null;
+			} else{
+				pis = connection.prepareStatement(SQL_ADMIN_NEW_USER);
+				pis.setString(1, login);
+				pis.setString(2, password);
+				pis.setString(3, role);
+				pis.setString(4, utn);
+				pis.setString(5, organizationName);
+				pis.setString(6, address);
+				pis.setString(7, STATUS);
+				pis.setString(8, mail);
+				pis.executeUpdate();
+				con.returnConnection(connection);
+				User user = new User(login);
+				user.setStatus(STATUS);
+				user.setUTN(utn);
+				return user;
+				}
+			} catch (SQLException ex){
+	            throw new ConnectionPoolException("SQL exception in userDao", ex);
+			} finally{
+				try{
+					if(ps!=null){
+						ps.close();
+					}
+					if(rs!=null){
+						rs.close();
+					}
+					if(pis!=null){
+						pis.close();
+					}
+				} catch(SQLException sqlee) {
+					throw new ConnectionPoolException("SQL exception in userDao", sqlee);
+		        }
+			}
+	}
+	
+	public void removeUser (String userLogin) throws ConnectionPoolException{
+		Connection connection = null;
+		PreparedStatement ps = null;
+		try{
+		 	ConnectionPool con = ConnectionPool.getInstance();
+			connection = con.takeConnection();
+			ps = connection.prepareStatement(SQL_REMOVE_USER);
+			ps.setString(1, userLogin);
+			ps.executeUpdate();
+			con.returnConnection(connection);
+		} catch (SQLException ex){
+            throw new ConnectionPoolException("SQL exception in userDao", ex);
+		} finally{
+			try {
+			if(ps!=null){
+				ps.close();
+				}
+			} catch (SQLException e) {
+				throw new ConnectionPoolException("SQL exception in userDao", e);
+			}
+		}	
+		
 	}
 }

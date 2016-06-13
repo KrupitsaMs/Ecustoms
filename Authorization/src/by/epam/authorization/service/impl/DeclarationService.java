@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import by.epam.authorization.dao.DAODecl;
 import by.epam.authorization.dao.DAOFactory;
 import by.epam.authorization.dao.DAOName;
-import by.epam.authorization.dao.con_pool.exception.ConnectionPoolException;
+import by.epam.authorization.dao.conpool.exception.ConnectionPoolException;
 import by.epam.authorization.entity.Declaration;
 import by.epam.authorization.service.DeclService;
 import by.epam.authorization.service.exception.ServiceException;
@@ -40,6 +40,8 @@ public class DeclarationService implements DeclService{
 			throw new ServiceException("Something going wrong");
 		}
 	}
+	
+	
 	private boolean declNumberValidator(String declNumber) {
 		if(declNumber.isEmpty()){
 			return false;
@@ -55,6 +57,41 @@ public class DeclarationService implements DeclService{
 	    } catch (ConnectionPoolException e) {
 			throw new ServiceException("Something going wrong");
 		}
+	}
+	@Override
+	public Declaration adminDeclarationRequest(String declNumber) throws ServiceException {
+		try {
+			if (!declNumberValidator(declNumber)){
+				return null;
+			} else{
+				DAODecl check = DAOFactory.getInstance().getDAODecl(DAOName.DECLARATION);
+				Declaration declaration = check.adminDeclarationRequest(declNumber);
+				return declaration;
+			}  
+		} catch (ConnectionPoolException e) {
+			throw new ServiceException("Something going wrong");
+		}
+	}
+	@Override
+	public ArrayList<Declaration> adminDeclarationListRequest(String status) throws ServiceException {
+		try {
+				DAODecl check = DAOFactory.getInstance().getDAODecl(DAOName.DECLARATION);
+				ArrayList<Declaration> declarationList = check.adminDeclarationListRequest(status);
+				return declarationList;
+			}  catch (ConnectionPoolException e) {
+			throw new ServiceException("Something going wrong");
+		}
+	}
+
+	@Override
+	public void declarationStatusChange(String declNumber, String status) throws ServiceException {
+		try {
+			DAODecl check = DAOFactory.getInstance().getDAODecl(DAOName.DECLARATION);
+			check.declarationStatusChange(declNumber, status);
+		}  catch (ConnectionPoolException e) {
+		throw new ServiceException("Something going wrong");
+	}
+		
 	}
 	@Override
 	public String declarationSubmission(Declaration newDeclaration)
