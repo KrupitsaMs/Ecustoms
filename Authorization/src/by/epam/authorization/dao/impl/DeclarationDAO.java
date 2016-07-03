@@ -72,7 +72,7 @@ public class DeclarationDAO implements DAODecl{
 					rs.close();
 				}
 			} catch(SQLException sqlee) {
-	            sqlee.printStackTrace();
+				throw new ConnectionPoolException("unable to close resultSet or prepareStatement", sqlee);
 	        }
 		}
 	}
@@ -113,7 +113,7 @@ public class DeclarationDAO implements DAODecl{
 					rs.close();
 				}
 			} catch(SQLException sqlee) {
-	            sqlee.printStackTrace();
+				throw new ConnectionPoolException("unable to close resultSet or prepareStatement", sqlee);
 	        }
 		}
 	}
@@ -160,7 +160,7 @@ public class DeclarationDAO implements DAODecl{
 					rs.close();
 				}
 			} catch(SQLException sqlee) {
-	            sqlee.printStackTrace();
+				throw new ConnectionPoolException("unable to close resultSet or prepareStatement", sqlee);
 	        }
 		}
 	}
@@ -219,7 +219,7 @@ public class DeclarationDAO implements DAODecl{
 					ps.close();
 				}
 			} catch(SQLException sqlee) {
-	            sqlee.printStackTrace();
+				throw new ConnectionPoolException("unable to close resultSet or prepareStatement", sqlee);
 	        }
 		}
 	}
@@ -275,7 +275,7 @@ public class DeclarationDAO implements DAODecl{
 					ps.close();
 				}
 			} catch(SQLException sqlee) {
-	            sqlee.printStackTrace();
+				throw new ConnectionPoolException("unable to close resultSet or prepareStatement", sqlee);
 	        }
 		}
 		
@@ -342,7 +342,7 @@ public class DeclarationDAO implements DAODecl{
 					rs.close();
 				}
 			} catch(SQLException sqlee) {
-	            sqlee.printStackTrace();
+				throw new ConnectionPoolException("unable to close resultSet or prepareStatement", sqlee);
 	        }
 		}
 		
@@ -408,7 +408,7 @@ public class DeclarationDAO implements DAODecl{
 					rs.close();
 				}
 			} catch(SQLException sqlee) {
-	            sqlee.printStackTrace();
+				throw new ConnectionPoolException("unable to close resultSet or prepareStatement", sqlee);
 	        }
 		}
 	}
@@ -474,7 +474,7 @@ public class DeclarationDAO implements DAODecl{
 					rs.close();
 				}
 			} catch(SQLException sqlee) {
-	            sqlee.printStackTrace();
+				throw new ConnectionPoolException("unable to close resultSet or prepareStatement", sqlee);
 	        }
 		}
 	}
@@ -505,7 +505,7 @@ public class DeclarationDAO implements DAODecl{
 					ps.close();
 				}
 			} catch(SQLException sqlee) {
-	            sqlee.printStackTrace();
+				throw new ConnectionPoolException("unable to close resultSet or prepareStatement", sqlee);
 	        }
 		}
 		

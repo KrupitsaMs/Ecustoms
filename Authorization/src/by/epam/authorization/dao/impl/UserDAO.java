@@ -74,7 +74,7 @@ public class UserDAO implements DAOUser{
 						rs.close();
 					}
 				} catch(SQLException sqlee) {
-					throw new ConnectionPoolException("SQL exception in userDao", sqlee);
+					throw new ConnectionPoolException("unable to close resultSet or prepareStatement", sqlee);
 		        }
 				
 			}	
@@ -127,7 +127,7 @@ public class UserDAO implements DAOUser{
 						pis.close();
 					}
 				} catch(SQLException sqlee) {
-					throw new ConnectionPoolException("SQL exception in userDao", sqlee);
+					throw new ConnectionPoolException("unable to close resultSet or prepareStatement", sqlee);
 		        }
 			}
 	 }
@@ -172,7 +172,7 @@ public class UserDAO implements DAOUser{
 					rs.close();
 				}
 			} catch(SQLException sqlee) {
-				throw new ConnectionPoolException("SQL exception in userDao", sqlee);
+				throw new ConnectionPoolException("unable to close resultSet or prepareStatement", sqlee);
 	        }
 	     }
 	}
@@ -202,7 +202,7 @@ public class UserDAO implements DAOUser{
 					ps.close();
 				}
 			} catch(SQLException sqlee) {
-				throw new ConnectionPoolException("SQL exception in userDao", sqlee);
+				throw new ConnectionPoolException("unable to close resultSet or prepareStatement", sqlee);
 	        }
 	     }
 	}
@@ -259,7 +259,7 @@ public class UserDAO implements DAOUser{
 						pis.close();
 					}
 				} catch(SQLException sqlee) {
-					throw new ConnectionPoolException("SQL exception in userDao", sqlee);
+					throw new ConnectionPoolException("unable to close resultSet or prepareStatement", sqlee);
 		        }
 			}
 	}
@@ -288,7 +288,7 @@ public class UserDAO implements DAOUser{
 				ps.close();
 				}
 			} catch (SQLException e) {
-				throw new ConnectionPoolException("SQL exception in userDao", e);
+				throw new ConnectionPoolException("unable to close resultSet or prepareStatement", e);
 			}
 		}	
 		

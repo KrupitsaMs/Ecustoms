@@ -5,6 +5,11 @@ import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import by.epam.authorization.controller.Controller;
+
 /**
  * LogoTag.java
  * Class implemented interface SimpleTagSupport
@@ -17,7 +22,10 @@ public class LogoTag extends SimpleTagSupport {
 	private String url = "";
 	private boolean showBorder = false;
 	private boolean showUrl = false;
+	private static final Logger LOGGER = LogManager.getLogger(Controller.class);
 
+	
+	
 	/**
      * Method-setter
      * @param String url
@@ -72,7 +80,7 @@ public class LogoTag extends SimpleTagSupport {
 
 			out.println(sb.toString());
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error(e);
 		}
 
 	}

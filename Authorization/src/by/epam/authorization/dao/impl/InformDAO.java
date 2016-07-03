@@ -22,7 +22,6 @@ public class InformDAO implements DAOInform{
 	private final static String MAIL_CONFIRMATION = "Confirmed";
 	private final static String NUMBER = "Number";
 	private final static String MIN_NUMBER = "0";
-	
 	/**
      * Method gets a e-mail address as a parameter
      * and check if it's is situated in Database 
@@ -59,7 +58,7 @@ public class InformDAO implements DAOInform{
 					rs.close();
 				}
 			} catch(SQLException sqlee) {
-				throw new ConnectionPoolException("SQL exception in InformDao", sqlee);
+				throw new ConnectionPoolException("unable to close resultSet or prepareStatement", sqlee);
 	        }
 		}
 	}
@@ -98,7 +97,7 @@ public class InformDAO implements DAOInform{
 					rs.close();
 				}
 			} catch(SQLException sqlee) {
-				throw new ConnectionPoolException("SQL exception in InformDao", sqlee);
+				throw new ConnectionPoolException("unable to close resultSet or prepareStatement", sqlee);
 	        }
 		}
 	}
