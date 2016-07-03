@@ -11,9 +11,27 @@ import by.epam.authorization.service.ServiceName;
 import by.epam.authorization.service.UserService;
 import by.epam.authorization.service.exception.ServiceException;
 
+/**
+ * AUserConfirmCommand.java
+ * Class implemented interface Command
+ * Gives to Admin function to change users status
+ * to "rejected"
+ * It contains method execute
+ * @author MasSword
+ */
+
 public class AUserDeclineCommand implements Command{
 	private static final String NOT_EXAMINED_USER = "not_examined_user";
 	private static final String STATUS = "rejected";
+	
+	/**
+     * Method reads a command from the request
+     * and processes it. The result will be given as
+     * a forward page
+     * @param request request to read the command from
+     * @return forward page - String class object
+     */
+	
 	@Override
 	public String execute(HttpServletRequest request) throws CommandException {
 		String page;

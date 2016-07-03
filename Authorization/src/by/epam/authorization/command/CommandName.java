@@ -1,5 +1,14 @@
 package by.epam.authorization.command;
 
+/**
+ * CommandName.class
+ * Enum class contains all values
+ * from JSP's tag
+ * <input type="hidden" name="command" value=""/>
+ * used to select needed command called user on JSP
+ * @author MasSword
+*/
+
 public enum CommandName {
 	LOGIN, RU, EN, REGISTRATION, RESTORE, EX_DECLARATION_CHECK, USER_PAGE, DECLARATION_CHECK, LOG_OUT,
 	USER_NEW_DECLARATION, CREATE_NEW_DECLARATION, SUBMIT_NEW_DECLARATION, ADD_NEW_GOOD, SHOW_ALL_DECLARATIONS,

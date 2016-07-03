@@ -10,8 +10,24 @@ import by.epam.authorization.entity.Declaration;
 import by.epam.authorization.service.DeclService;
 import by.epam.authorization.service.exception.ServiceException;
 
-public class DeclarationService implements DeclService{
+/**
+ * DeclarationService.java
+ * Class on Service level which provides operations with returned Declaration.java's objects. 
+ * @author MasSword
+ */
 
+public class DeclarationService implements DeclService{
+	
+	private final static String DECL_NUMBER = "[\\d]";
+
+	/**
+     * Method reads and processes declaration number
+     * and if declaration's type is "EX"
+     * returns Declaration.java's object, else - null
+     * @param String declNumber
+     * @return Declaration.java object
+     */
+	
 	@Override
 	public Declaration exDeclarationRequest(String declNumber) throws ServiceException {
 		try {
@@ -23,9 +39,18 @@ public class DeclarationService implements DeclService{
 				return exDeclaration;
 			}  
 		} catch (ConnectionPoolException e) {
-			throw new ServiceException("Something going wrong");
+			throw new ServiceException("unable to check the ex declaration status", e);
 		}	
 	}
+	
+	/**
+     * Method reads and processes declaration number
+     * and if declaration is situated 
+     * returns Declaration.java's object, else - null
+     * @param String declNumber
+     * @return Declaration.java object
+     */
+	
 	@Override
 	public Declaration declarationRequest(String declNumber)throws ServiceException {
 		try {
@@ -37,17 +62,31 @@ public class DeclarationService implements DeclService{
 				return declaration;
 			}  
 		} catch (ConnectionPoolException e) {
-			throw new ServiceException("Something going wrong");
+			throw new ServiceException("unable to check the declaration", e);
 		}
 	}
 	
-	
+	/**
+     * Method analyzes if parameter declaration number is not null
+     * if declaration number is null, method returns false,
+     * if declaration number is not null, method returns true
+     * @param String declNumber
+     * @return boolean instance
+     */
 	private boolean declNumberValidator(String declNumber) {
-		if(declNumber.isEmpty()){
+		if(!(declNumber.matches(DECL_NUMBER))){
 			return false;
 		}
 		return true;
 	}
+	
+	/**
+     * Method reads and processes unique tax payers number
+     * and returns list of all companies declarations
+     * @param String UTN
+     * @return ArrayList<Declaration> list
+     */
+	
 	@Override
 	public ArrayList<Declaration> userDeclarationListRequest(String UTN) throws ServiceException {
 	    try{
@@ -55,9 +94,19 @@ public class DeclarationService implements DeclService{
 		    ArrayList<Declaration> declList= check.userDeclarationListRequest(UTN);
 		    return declList;
 	    } catch (ConnectionPoolException e) {
-			throw new ServiceException("Something going wrong");
+			throw new ServiceException("unable to return list of declarations", e);
 		}
 	}
+	
+	/**
+     * Method reads and processes declaration number
+     * and if declaration is situated 
+     * returns Declaration.java's object, else - null
+     * this method accessible only for users with status "admin"
+     * @param String declNumber
+     * @return Declaration.java object
+     */
+	
 	@Override
 	public Declaration adminDeclarationRequest(String declNumber) throws ServiceException {
 		try {
@@ -69,9 +118,17 @@ public class DeclarationService implements DeclService{
 				return declaration;
 			}  
 		} catch (ConnectionPoolException e) {
-			throw new ServiceException("Something going wrong");
+			throw new ServiceException("unable to return a declaration", e);
 		}
 	}
+	
+	/**
+     * Method gets a declaration status as a parameter
+     * process it, and returns list of Declaration's with this status
+     * @param String status
+     * @return ArrayList<Declaration> list
+     */
+	
 	@Override
 	public ArrayList<Declaration> adminDeclarationListRequest(String status) throws ServiceException {
 		try {
@@ -79,17 +136,23 @@ public class DeclarationService implements DeclService{
 				ArrayList<Declaration> declarationList = check.adminDeclarationListRequest(status);
 				return declarationList;
 			}  catch (ConnectionPoolException e) {
-			throw new ServiceException("Something going wrong");
+			throw new ServiceException("unable to get list of declarations", e);
 		}
 	}
 
+	/**
+     * Method gets a declaration status  and number as a parameters
+     * and changes status of declaration with this number in database
+     * @param String status, String declNumber
+     */
+	
 	@Override
 	public void declarationStatusChange(String declNumber, String status) throws ServiceException {
 		try {
 			DAODecl check = DAOFactory.getInstance().getDAODecl(DAOName.DECLARATION);
 			check.declarationStatusChange(declNumber, status);
 		}  catch (ConnectionPoolException e) {
-		throw new ServiceException("Something going wrong");
+		throw new ServiceException("unable to change the declaration sstatus", e);
 	}
 		
 	}

@@ -9,12 +9,27 @@ import by.epam.authorization.dao.DAOInform;
 import by.epam.authorization.dao.conpool.exception.ConnectionPoolException;
 import by.epam.authorization.dao.conpool.impl.ConnectionPool;
 
+/**
+ * InformDAO.java
+ * Class implemented interface DAOInform
+ * Provides operations in Database with supporting service's methods on DAO level
+ * @author MasSword
+ */
+
 public class InformDAO implements DAOInform{
 	private final static String SQL_LOGINING = "SELECT * FROM ecustoms.users WHERE Mail = ?";
 	private final static String SQL_MAX_DECL_NUMBER = "SELECT MAX(Registration_number) AS 'Number' FROM ecustoms.declarations";
 	private final static String MAIL_CONFIRMATION = "Confirmed";
 	private final static String NUMBER = "Number";
 	private final static String MIN_NUMBER = "0";
+	
+	/**
+     * Method gets a e-mail address as a parameter
+     * and check if it's is situated in Database 
+     * If it's true, method returns String message
+     * @param String mail
+     * @return String message
+     */
 	
 	@Override
 	public String mailCheck(String mail) throws ConnectionPoolException {
@@ -34,7 +49,7 @@ public class InformDAO implements DAOInform{
 				return null;
 			}
 		} catch (SQLException ex){
-            throw new ConnectionPoolException("SQL exception in InformDao", ex);
+            throw new ConnectionPoolException("unable to check the e-mail", ex);
 		} finally{
 			try{
 				if(ps!=null){
@@ -44,10 +59,17 @@ public class InformDAO implements DAOInform{
 					rs.close();
 				}
 			} catch(SQLException sqlee) {
-				throw new ConnectionPoolException("SQL exception in userDao", sqlee);
+				throw new ConnectionPoolException("SQL exception in InformDao", sqlee);
 	        }
 		}
 	}
+	
+	/**
+     * Method gets from Database max declaration's number
+     * and returns it
+     * @return String message
+     */
+	
 	@Override
 	public String maxDeclarationNumberRequest() throws ConnectionPoolException {
 		Connection connection = null;
@@ -66,7 +88,7 @@ public class InformDAO implements DAOInform{
 				return MIN_NUMBER;
 			}
 		} catch (SQLException ex){
-            throw new ConnectionPoolException("SQL exception in InformDao", ex);
+            throw new ConnectionPoolException("unable to check a max declaration's number", ex);
 		} finally{
 			try{
 				if(ps!=null){
@@ -76,7 +98,7 @@ public class InformDAO implements DAOInform{
 					rs.close();
 				}
 			} catch(SQLException sqlee) {
-				throw new ConnectionPoolException("SQL exception in userDao", sqlee);
+				throw new ConnectionPoolException("SQL exception in InformDao", sqlee);
 	        }
 		}
 	}

@@ -13,12 +13,28 @@ import by.epam.authorization.service.ServiceFactory;
 import by.epam.authorization.service.ServiceName;
 import by.epam.authorization.service.exception.ServiceException;
 
+/**
+ * ANewDeclarationsReview.java
+ * Class implemented interface Command
+ * Command choose all registered users in service
+ * It contains method execute
+ * @author MasSword
+ */
+
 public class ANewDeclarationsReview implements Command{
 
 	private static final String STATUS = "not yet examined";
 	private static final String SEARCHED_DECLARATION = "searched_declaration";
 	private static final String LIST_SIZE = "list_size";
 
+	/**
+     * Method reads a command from the request
+     * and processes it. The result will be given as
+     * a forward page
+     * @param request request to read the command from
+     * @return forward page - String class object
+     */
+	
 	@Override
 	public String execute(HttpServletRequest request) throws CommandException {
 		String page;

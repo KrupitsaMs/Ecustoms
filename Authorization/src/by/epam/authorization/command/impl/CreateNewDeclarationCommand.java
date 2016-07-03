@@ -11,6 +11,15 @@ import by.epam.authorization.entity.Declaration;
 import by.epam.authorization.entity.Good;
 import by.epam.authorization.entity.User;
 
+/**
+ * CreateNewDeclarationCommand.java
+ * Class implemented interface Command
+ * One of the classes intended to submit new declaration
+ * Reads the information from JSP and creates new Declaration
+ * It contains method execute
+ * @author MasSword
+ */
+
 public class CreateNewDeclarationCommand implements Command{
 	private static final String TYPE = "declaration_type";
 	private static final String TRADE_COUNTRY = "trade_country";
@@ -23,6 +32,19 @@ public class CreateNewDeclarationCommand implements Command{
 	private static final String ORIGIN = "origin";
 	private static final String NEW_DECLARATION = "new_declaration";
 	private static final String ONE = "1";
+	
+	private final static String TYPE_VALIDATOR = "[A-Z]{2}";
+	private final static String CODE_VALIDATOR = "[\\d]{2}";
+	private final static String GOOD_VALIDATOR = "[A-Za-z\\d\\s\\p{Punct}]{1,40}";
+	private final static String VALUE_VALIDATOR = "[\\d]{1,20}";
+	private final static String CURRENCY_VALIDATOR = "[A-Z]{3}";
+	/**
+     * Method reads a command from the request
+     * and processes it. The result will be given as
+     * a forward page
+     * @param request request to read the command from
+     * @return forward page - String class object
+     */
 	
 	@Override
 	public String execute(HttpServletRequest request) throws CommandException {
@@ -43,9 +65,14 @@ public class CreateNewDeclarationCommand implements Command{
 		ArrayList <Good> goodsList = new ArrayList<Good>(1);
 		goodsList.add(newDeclarationGood);
 		newDeclaration.setDeclarationGoods(goodsList);
-		
-		request.getSession().setAttribute(NEW_DECLARATION, newDeclaration);
-		return PageName.ADD_NEW_GOOD;
+		if (!(type.matches(TYPE_VALIDATOR) && tradeCountry.matches(TYPE_VALIDATOR) && code.matches(CODE_VALIDATOR)
+				&& good.matches(GOOD_VALIDATOR) && value.matches(VALUE_VALIDATOR) && currency.matches(CURRENCY_VALIDATOR)
+				&& origin.matches(TYPE_VALIDATOR))){
+			return PageName.DECLARATION_SUB_FAILED;
+		}else{
+			request.getSession().setAttribute(NEW_DECLARATION, newDeclaration);
+			return PageName.ADD_NEW_GOOD;
+		}
 	}
 
 }

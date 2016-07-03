@@ -2,6 +2,13 @@ package by.epam.authorization.entity;
 
 import java.io.Serializable;
 
+/**
+ * User.java
+ * Class defines entity of service's User with it's parameters
+ * name, password, role, unique taxpayer number, organization name, address, status, mail
+ * @author MasSword
+ */
+
 public class User implements Serializable{
 	 private static final long serialVersionUID = 1L;
 	 private String name;
@@ -38,64 +45,155 @@ public class User implements Serializable{
 		 this.mail=mail;
 	 }
 	 
+	/**
+    * Method-getter
+	* @return String role
+	*/
+	 
 	public String getRole() {
 		return role;
 	}
+	
+	/**
+     * Method-setter
+     * @parameter String role
+     */
+	
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	/**
+	* Method-getter
+    * @return String name
+	*/
+	
 	public String getName() {
 		return name;
 	}
+	
+	/**
+     * Method-setter
+     * @parameter String name
+     */
+	
 	public void setName(String name) {
 		this.name = name;
 	}
 	
+	/**
+	* Method-getter
+    * @return String UTN
+	*/
+	
 	public String getUTN() {
 		return UTN;
 	}
+	
+	/**
+     * Method-setter
+     * @parameter String utn
+     */
+	
 	public void setUTN(String uTN) {
 		UTN = uTN;
 	}
+	
+	/**
+	* Method-getter
+    * @return String organizationName
+	*/
+	
 	public String getOrganizationName() {
 		return organizationName;
 	}
+	
+	/**
+     * Method-setter
+     * @parameter String organizationName
+     */
+	
 	public void setOrganizationName(String organizationName) {
 		this.organizationName = organizationName;
 	}
+	
+	/**
+	* Method-getter
+    * @return String mail
+	*/
 	
 	public String getMail() {
 		return mail;
 	}
 
+	/**
+     * Method-setter
+     * @parameter String mail
+     */
+	
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
 
+	/**
+	* Method-getter
+    * @return String address
+	*/
+	
 	public String getAddress() {
 		return address;
 	}
 
+	/**
+     * Method-setter
+     * @parameter String address
+     */
+	
 	public void setAddress(String address) {
 		this.address = address;
 	}
     
+	/**
+	* Method-getter
+    * @return String  password
+	*/
+	
 	public String getPassword() {
 		return password;
 	}
 
+	/**
+     * Method-setter
+     * @parameter String password
+     */
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+	/**
+	* Method-getter
+    * @return String  status
+	*/
+	
 	public String getStatus() {
 		return status;
 	}
 
+	/**
+     * Method-setter
+     * @parameter String status
+     */
+	
 	public void setStatus(String status) {
 		this.status = status;
 	}
 
+	/**
+     * Returns a hash code value for the object.
+     * @return int hash code
+     */
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -113,6 +211,12 @@ public class User implements Serializable{
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
+	
+	/**
+     * Indicates whether some other object is "equal to" this one.
+     * @return boolean equality
+     */
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

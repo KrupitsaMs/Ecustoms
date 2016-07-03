@@ -2,6 +2,14 @@ package by.epam.authorization.entity;
 
 import java.util.ArrayList;
 
+/**
+ * Declaration.java
+ * Class defines customs declaration entity with it's parameters
+ * declaration number, it's type, unique taxpayer number, trade country, status
+ * and list of  declaration's goods
+ * @author MasSword
+ */
+
 public class Declaration {
 	private String number;
 	private String type;
@@ -45,43 +53,120 @@ public class Declaration {
 		this.status=status;
 		this.UTN=UTN;
 	}
+	
+	/**
+     * Method-getter
+     * @return String number
+     */
+	
 	public String getNumber() {
 		return number;
 	}
+	
+	/**
+     * Method-setter
+     * @parameter String number
+     */
+	
 	public void setNumber(String number) {
 		this.number = number;
 	}
+	
+	/**
+     * Method-getter
+     * @return String type
+     */
+	
 	public String getType() {
 		return type;
 	}
+	
+	/**
+     * Method-setter
+     * @parameter String type
+     */
+	
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	/**
+     * Method-getter
+     * @return String UTN
+     */
+	
 	public String getUTN() {
 		return UTN;
 	}
+	
+	/**
+     * Method-setter
+     * @parameter String utn
+     */
+	
 	public void setUTN(String uTN) {
 		UTN = uTN;
 	}
+	
+	/**
+     * Method-getter
+     * @return String trade_country
+     */
+	
 	public String getTrade_country() {
 		return trade_country;
 	}
+	
+	/**
+     * Method-setter
+     * @parameter String trade_country
+     */
+	
 	public void setTrade_country(String trade_country) {
 		this.trade_country = trade_country;
 	}
+	
+	/**
+     * Method-getter
+     * @return String status
+     */
+	
 	public String getStatus() {
 		return status;
 	}
+	
+	/**
+     * Method-setter
+     * @parameter String status
+     */
+	
 	public void setStatus(String status) {
 		this.status = status;
 	}
 	
+	/**
+     * Method-getter
+     * @return ArrayList<Good> declarationGoods
+     */
+	
 	public ArrayList<Good> getDeclarationGoods() {
 		return declarationGoods;
 	}
+	
+	/**
+     * Method-setter
+     * @parameter ArrayList<Good> declarationGoods
+     */
+	
 	public void setDeclarationGoods(ArrayList<Good> declarationGoods) {
 		this.declarationGoods = declarationGoods;
 	}
+	
+	/**
+     * Returns a hash code value for the object.
+     * @return int hash code
+     */
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -94,6 +179,12 @@ public class Declaration {
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
+	
+	/**
+     * Indicates whether some other object is "equal to" this one.
+     * @return boolean equality
+     */
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

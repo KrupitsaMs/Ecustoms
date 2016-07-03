@@ -11,11 +11,27 @@ import by.epam.authorization.service.ServiceFactory;
 import by.epam.authorization.service.ServiceName;
 import by.epam.authorization.service.exception.ServiceException;
 
+/**
+ * AShowDeclarationCommand.java
+ * Class implemented interface Command
+ * Displays on screen searched declaration from database 
+ * It contains method execute
+ * @author MasSword
+ */
+
 public class AShowDeclarationCommand implements Command{
 	
 	private static final String DECL_CHECK = "decl_number";
 	private static final String SEARCHED_DECLARATION = "searched_declaration";
 
+	/**
+     * Method reads a command from the request
+     * and processes it. The result will be given as
+     * a forward page
+     * @param request request to read the command from
+     * @return forward page - String class object
+     */
+	
 	@Override
 	public String execute(HttpServletRequest request) throws CommandException {
 		String page;
@@ -23,7 +39,7 @@ public class AShowDeclarationCommand implements Command{
 			DeclService service = ServiceFactory.getServiceFactory().getDeclService(ServiceName.DECLARATION);
 			Declaration declaration = service.adminDeclarationRequest(request.getParameter(DECL_CHECK));
 			if (declaration==null){
-				page = PageName.DECLARATION_FAILED;
+				page = PageName.A_DECLARATION_SHOW_FAIL;
 			} else{
 				request.setAttribute(SEARCHED_DECLARATION, declaration);
 				page = PageName.A_DECLARATION_SHOW_SUCC;

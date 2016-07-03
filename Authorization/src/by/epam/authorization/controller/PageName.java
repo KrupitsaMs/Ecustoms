@@ -1,5 +1,12 @@
 package by.epam.authorization.controller;
 
+/**
+ * PageName.class
+ * Enum class contains all service's JSP page addresses
+ * used to return searched JSP as a forward page
+ * @author MasSword
+*/
+
 public final class PageName {
 	public static final String INDEX_PAGE = "index.jsp";
 	public static final String ERROR_PAGE = "WEB-INF/jsp/error.jsp";
@@ -10,6 +17,8 @@ public final class PageName {
 	public static final String RESTORE_SUCCESS = "WEB-INF/jsp/restore_success.jsp";
 	public static final String ERROR_RESTORE = "WEB-INF/jsp/error_restore.jsp";
 	public static final String EX_DECLARATION_CONFIRMATION = "WEB-INF/jsp/ex_decl_confirm.jsp";
+	public static final String EX_DECLARATION_REJ = "WEB-INF/jsp/ex_decl_rej.jsp";
+	public static final String U_EX_DECLARATION_CONFIRMATION = "WEB-INF/jsp/a_ex_decl_confirm.jsp";
 	public static final String EX_DECLARATION_PROCESSING = "WEB-INF/jsp/ex_decl_processing.jsp";
 	public static final String EX_DECLARATION_FAILED = "WEB-INF/jsp/ex_decl_failed.jsp";
 	public static final String DECLARATION_CONFIRMATION = "WEB-INF/jsp/decl_confirm.jsp";
@@ -35,11 +44,13 @@ public final class PageName {
 	public static final String A_USERS_REVIEW_SUCC = "WEB-INF/jsp/a_users_review_succ.jsp";
 	public static final String A_DECLARATION_SHOW = "WEB-INF/jsp/a_show_declaration_choose.jsp";
 	public static final String A_DECLARATION_SHOW_SUCC = "WEB-INF/jsp/a_show_declaration_succ.jsp";
+	public static final String A_DECLARATION_SHOW_FAIL = "WEB-INF/jsp/a_show_declaration_fail.jsp";
 	public static final String A_DECLARATION_REVIEW = "WEB-INF/jsp/a_declaration_review.jsp";	
 	public static final String A_DECLARATION_REVIEW_FAIL = "WEB-INF/jsp/a_declaration_review_fail.jsp";
 	public static final String A_DECLARATION_REVIEW_SUCC = "WEB-INF/jsp/a_declaration_review_succ.jsp";
 	public static final String A_REGISTRATION = "WEB-INF/jsp/a_registration.jsp";
 	public static final String A_REGISTRATION_SUCC = "WEB-INF/jsp/a_registration_succ.jsp";
 	public static final String A_REGISTRATION_FAIL = "WEB-INF/jsp/a_registration_fail.jsp";
+	public static final String DECLARATION_REJECT = "WEB-INF/jsp/a_decl_reject.jsp";
 	private PageName(){};
 }

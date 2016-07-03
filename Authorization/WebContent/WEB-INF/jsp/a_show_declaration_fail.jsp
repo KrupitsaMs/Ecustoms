@@ -7,21 +7,22 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Changed declaration number input</title>
+<title>Declaration not found</title>
 <fmt:setLocale value="${sessionScope.command}"/>
 <fmt:setBundle basename="resources.locale" var="loc" />
-<fmt:message bundle="${loc}" key="local.leftcol.user_change_declaration" var="user_change_declaration"/>
-<fmt:message bundle="${loc}" key="local.leftcol.user_check_declaration" var="user_check_declaration"/>
 <fmt:message bundle="${loc}" key="local.leftcol.menu" var="menu"/>
 <fmt:message bundle="${loc}" key="local.topbar.usual" var="head"/>
-<fmt:message bundle="${loc}" key="local.leftcol.user_new_declaration" var="user_new_declaration"/>
+<fmt:message bundle="${loc}" key="local.content.ex_decl_failed" var="ex_decl_failed"/>
+<fmt:message bundle="${loc}" key="local.leftcol.export_declaration" var="export_declaration"/>
+<fmt:message bundle="${loc}" key="local.leftcol.a_show_declaration" var="a_show_declaration"/>
+<fmt:message bundle="${loc}" key="local.leftcol.a_show_all_users" var="a_show_all_users"/>
+<fmt:message bundle="${loc}" key="local.leftcol.a_user_review" var="a_user_review"/>
+<fmt:message bundle="${loc}" key="local.leftcol.a_new_declarations_review" var="a_new_declarations_review"/>
+<fmt:message bundle="${loc}" key="local.leftcol.a_registration" var="a_registration"/>
 <fmt:message bundle="${loc}" key="local.rightcol.organization_name" var="organization_name"/>
 <fmt:message bundle="${loc}" key="local.rightcol.role" var="role"/>
 <fmt:message bundle="${loc}" key="local.rightcol.user_log_out" var="user_log_out"/>
 <fmt:message bundle="${loc}" key="local.leftcol.show_all_declarations" var="show_all_declarations"/>
-<fmt:message bundle="${loc}" key="local.content.changed_declaration_message" var="changed_declaration_message"/>
-<fmt:message bundle="${loc}" key="local.leftcol.show_all_declarations" var="show_all_declarations"/>
-<fmt:message bundle="${loc}" key="local.content.declaration_choose" var="declaration_choose"/>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}\Resources\css\registration.css">
 <script type="text/javascript" src="${pageContext.request.contextPath}\Resources\js\timedate.js"></script>
@@ -38,31 +39,32 @@
           <div id="leftcol">
             <h1>${menu}</h1>
 			 <form action="Controller" method="post">
-				<input type="hidden" name="command" value="user_page" />
-				<input type="hidden" name="button" value="declaration_check" />
-		        <input id="cont_button" type="submit" value="${user_check_declaration}" />
+				<input type="hidden" name="command" value="a_show_all_users" />
+		        <input id="cont_button" type="submit" value="${a_show_all_users}" />
 	        </form>
 			<form action="Controller" method="post">
-			    <input type="hidden" name="command" value="user_page" />
-				<input type="hidden" name="button" value="user_change_declaration" />
-		        <input id="cont_button" type="submit" value="${user_change_declaration}" />
+			    <input type="hidden" name="command" value="a_user_review" />
+		        <input id="cont_button" type="submit" value="${a_user_review}" />
 	        </form>
 			<form action="Controller" method="post">
-				<input type="hidden" name="command" value="user_new_declaration" />
-		        <input id="cont_button" type="submit" value="${user_new_declaration}" />
+				<input type="hidden" name="command" value="admin_page" />
+				<input type="hidden" name="button" value="a_show_declaration" />
+		        <input id="cont_button" type="submit" value="${a_show_declaration}" />
+	        </form>
+			<form action="Controller" method="post">
+				<input type="hidden" name="command" value="a_new_declarations_review" />
+		        <input id="cont_button" type="submit" value="${a_new_declarations_review}" />
 	         </form>
-			<form action="Controller" method="post">
-				<input type="hidden" name="command" value="show_all_declarations" />
-		        <input id="cont_button" type="submit" value="${show_all_declarations}" />
-	        </form>
+			 <form action="Controller" method="post">
+				<input type="hidden" name="command" value="admin_page" />
+				<input type="hidden" name="button" value="a_registration" />
+		        <input id="cont_button" type="submit" value="${a_registration}" />
+	         </form>
           </div>
           <div id="content">
-			<h3>${changed_declaration_message}</h3>
-			<form action="Controller" method="post">
-			   <input id="decl_number" type="text" name="declaration_number" value=""/><br />
-			   <input type="hidden" name="command" value="declaration_choose" /> 
-			   <input id="button" type="submit" value="${declaration_choose}" />
-			</form>
+		  <jsp:useBean id="declaration" class="by.epam.authorization.entity.Declaration" type="java.lang.Object" scope="request"/>
+		    <h1> Declaration Number - <jsp:getProperty property="number" name = "declaration"/></h1>
+		    <h1> Status: ${ex_decl_failed}</h1>
 		  </div>
           <div id="rightcol">
 		    <h3 id="user_inf">${organization_name} <c:out value="${sessionScope.login.organizationName}"/></h3>

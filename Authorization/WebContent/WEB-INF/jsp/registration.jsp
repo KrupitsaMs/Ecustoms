@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri ="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib prefix="mytag" uri="WEB-INF/tlds/LogoTag.tld"%>
+<%@ taglib prefix="mytag" uri="LogoTag.tld"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -44,13 +44,13 @@
         <div id="container1">
           <div id="leftcol">
             <h1>${menu}</h1>
-			<form action="about.jsp" >
+			<form action="About" >
 		        <input id="cont_button" type="submit" value="${about}" />
 	        </form>
 			<form action="index.jsp" >
 		        <input id="cont_button" type="submit" value="${author_message}" />
 	        </form>
-			<form action="ex_declaration_check.jsp">
+			<form action="EX_Check">
 		        <input id="cont_button" type="submit" value="${export_declaration}" />
 	        </form>
           </div>

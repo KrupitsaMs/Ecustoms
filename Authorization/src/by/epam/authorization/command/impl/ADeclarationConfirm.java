@@ -11,11 +11,27 @@ import by.epam.authorization.service.ServiceFactory;
 import by.epam.authorization.service.ServiceName;
 import by.epam.authorization.service.exception.ServiceException;
 
+/**
+ * ADeclarationConfirm.java
+ * Class implemented interface Command
+ * Command changes status of declaration to "confirmed"
+ * It contains method execute
+ * @author MasSword
+ */
+
 public class ADeclarationConfirm implements Command{
 	
 	private static final String STATUS = "confirmed";
 	private static final String SEARCHED_DECLARATION = "searched_declaration";
 
+	/**
+     * Method reads a command from the request
+     * and processes it. The result will be given as
+     * a forward page
+     * @param request request to read the command from
+     * @return forward page - String class object
+     */
+	
 	@Override
 	public String execute(HttpServletRequest request) throws CommandException {
 		String page;

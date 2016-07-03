@@ -17,12 +17,28 @@ import by.epam.authorization.controller.PageName;
 import by.epam.authorization.entity.User;
 
 
+/**
+ * AccessFilter.java
+ * Class implements interface Filter
+ * It checks user's access to commands.
+ * @author MasSword
+ */
+
 public class AccessFilter implements Filter{
 	private static final String COMMAND_NAME = "command";
 	private static final String LOGIN = "login";
 	
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {}
+	
+	
+	/**
+     * Method reads a command from the request
+     * and checks user's access to selected command.
+     * If user doesn't have access to selected command
+     * it redirects request to index page
+     * @param ServletRequest  request, ServletResponse response, FilterChain chain
+     */
 	
 	@Override
 	public void doFilter(ServletRequest  request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -49,6 +65,13 @@ public class AccessFilter implements Filter{
 	@Override
 	public void destroy() {}
 
+	
+	/**
+     * Method get status and command as a parameters
+     * and measures accessibility of the current command to the user
+     * @param String status, CommandName command
+     * @return boolean accessibility of the current command
+     */
     private boolean checkAccess(String status, CommandName command) {
         UserStatus userStatus = UserStatus.valueOf(status.toUpperCase());
         boolean access = false;
@@ -91,6 +114,8 @@ public class AccessFilter implements Filter{
                     case CHANGE_NEW_GOOD:
                         access = true;
                         break;
+				default:
+					break;
                 }
             case ADMIN:
                 switch (command) {
@@ -127,6 +152,8 @@ public class AccessFilter implements Filter{
                     case A_REGISTRATION:
                         access = true;
                         break;
+				default:
+					break;
                 }
             case GUEST:
             	 switch (command) {
@@ -148,11 +175,20 @@ public class AccessFilter implements Filter{
           		case EX_DECLARATION_CHECK:
           		    access = true;
           		    break;
+				default:
+					break;
            }
         }
         return access;
     }
 	
+	/**
+     * Method reads a command from the request
+     * and returns CommandName. 
+     * @param HttpServletRequest request
+     * @return CommandName - object of the CommandName class
+     */
+    
 	 private CommandName getCommandName(HttpServletRequest request) {
 	        String commandName;
 	        commandName = request.getParameter(COMMAND_NAME);
@@ -165,6 +201,10 @@ public class AccessFilter implements Filter{
 	        return action;
 	 }
 	 
+		/**
+	     * Internal Enum class
+	     * that contains users status in the service
+	     */
 	    private enum UserStatus {
 	        USER, ADMIN, GUEST
 	    }

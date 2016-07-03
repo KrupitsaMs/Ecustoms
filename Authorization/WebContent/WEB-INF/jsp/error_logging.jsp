@@ -33,23 +33,23 @@
         <div id="container1">
           <div id="leftcol">
             <h1>${menu}</h1>
-			<form action="about.jsp" >
+            <form action="About" >
 		        <input id="cont_button" type="submit" value="${about}" />
 	        </form>
 			<form action="index.jsp" >
 		        <input id="cont_button" type="submit" value="${author_message}" />
 	        </form>
-			<form action="registration.jsp" >
+			<form action="Registration" >
 		        <input id="cont_button" type="submit" value="${registration}" />
 	         </form>
-			 <form action="ex_declaration_check.jsp">
+			 <form action="EX_Check">
 		        <input id="cont_button" type="submit" value="${export_declaration}" />
 	        </form>
           </div>
           <div id="content">
 		    <h1>${logging_error}</h1>
 			<b><a href="index.jsp"> ${logging1_error_message}</a></b><br />
-			<b><a href="account_recovery.jsp"> ${logging2_error_message}</a></b><br />
+			<b><a href="Account_recovery"> ${logging2_error_message}</a></b><br />
 		  </div>
           <div id="rightcol">
 		  </div>

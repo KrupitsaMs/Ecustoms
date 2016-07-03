@@ -37,23 +37,27 @@
           <div id="leftcol">
             <h1>${menu}</h1>
 			 <form action="Controller" method="post">
-				<input type="hidden" name="command" value="user_page" />
-				<input type="hidden" name="button" value="declaration_check" />
-		        <input id="cont_button" type="submit" value="${user_check_declaration}" />
+				<input type="hidden" name="command" value="a_show_all_users" />
+		        <input id="cont_button" type="submit" value="${a_show_all_users}" />
 	        </form>
 			<form action="Controller" method="post">
-			    <input type="hidden" name="command" value="user_page" />
-				<input type="hidden" name="button" value="user_change_declaration" />
-		        <input id="cont_button" type="submit" value="${user_change_declaration}" />
+			    <input type="hidden" name="command" value="a_user_review" />
+		        <input id="cont_button" type="submit" value="${a_user_review}" />
 	        </form>
 			<form action="Controller" method="post">
-				<input type="hidden" name="command" value="user_new_declaration" />
-		        <input id="cont_button" type="submit" value="${user_new_declaration}" />
+				<input type="hidden" name="command" value="admin_page" />
+				<input type="hidden" name="button" value="a_show_declaration" />
+		        <input id="cont_button" type="submit" value="${a_show_declaration}" />
+	        </form>
+			<form action="Controller" method="post">
+				<input type="hidden" name="command" value="a_new_declarations_review" />
+		        <input id="cont_button" type="submit" value="${a_new_declarations_review}" />
 	         </form>
-			<form action="Controller" method="post">
-				<input type="hidden" name="command" value="show_all_declarations" />
-		        <input id="cont_button" type="submit" value="${show_all_declarations}" />
-	        </form>
+			 <form action="Controller" method="post">
+				<input type="hidden" name="command" value="admin_page" />
+				<input type="hidden" name="button" value="a_registration" />
+		        <input id="cont_button" type="submit" value="${a_registration}" />
+	         </form>
           </div>
           <div id="content">
 		  <jsp:useBean id="declaration" class="by.epam.authorization.entity.Declaration" type="java.lang.Object" scope="request"/>

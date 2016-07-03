@@ -11,11 +11,27 @@ import by.epam.authorization.service.ServiceFactory;
 import by.epam.authorization.service.ServiceName;
 import by.epam.authorization.service.exception.ServiceException;
 
+/**
+ * LoginCommand.java
+ * Class implemented interface Command
+ * This class is designed to provide user authentication at the service
+ * It contains method execute
+ * @author MasSword
+ */
+
 public class LoginCommand implements Command{
 	private static final String LOGIN = "login";
 	private static final String PASSWORD = "password";
 	private static final String USER ="user";
 	private static final String ADMIN ="admin";
+	
+	/**
+     * Method reads a command from the request
+     * and processes it. The result will be given as
+     * a forward page
+     * @param request request to read the command from
+     * @return forward page - String class object
+     */
 	
 	@Override
 	public String execute(HttpServletRequest request) throws CommandException{

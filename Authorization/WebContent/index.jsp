@@ -38,10 +38,10 @@
         <div id="container1">
           <div id="leftcol">
             <h1>${menu}</h1>
-			<form action="about.jsp" >
+			<form action="About" >
 		        <input id="cont_button" type="submit" value="${about}" />
 	         </form>
-			 <form action="ex_declaration_check.jsp">
+			 <form action="EX_Check">
 		        <input id="cont_button" type="submit" value="${export_declaration}" />
 	         </form>
           </div>
@@ -55,7 +55,7 @@
 	          <input type="password" name="password" value="" /><br />
 	          <input id="button" type="submit" value="${login_button}" />
             </form>
-			<b>${registr1_message} <a href="registration.jsp"> ${registr2_message}</a></b>
+			<b>${registr1_message} <a href="Registration"> ${registr2_message}</a></b>
 		  </div>
           <div id="rightcol">
 		      <h1>${locmenu}</h1>

@@ -31,13 +31,13 @@
         <div id="container1">
           <div id="leftcol">
             <h1>${menu}</h1>
-			<form action="about.jsp" >
+			<form action="About" >
 		        <input id="cont_button" type="submit" value="${about}" />
 	        </form>
 			<form action="index.jsp" >
 		        <input id="cont_button" type="submit" value="${author_message}" />
 	        </form>
-			<form action="ex_declaration_check.jsp">
+			<form action="EX_Check">
 		        <input id="cont_button" type="submit" value="${export_declaration}" />
 	        </form>
           </div>

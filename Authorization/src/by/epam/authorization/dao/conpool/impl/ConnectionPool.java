@@ -17,7 +17,6 @@ import java.sql.SQLXML;
 import java.sql.Savepoint;
 import java.sql.Statement;
 import java.sql.Struct;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -31,6 +30,13 @@ import by.epam.authorization.dao.conpool.ConPool;
 import by.epam.authorization.dao.conpool.db.DBParameter;
 import by.epam.authorization.dao.conpool.db.DBResourceManager;
 import by.epam.authorization.dao.conpool.exception.ConnectionPoolException;
+
+/**
+ * ConnectionPoolException.class
+ * Class implemented interface ConPool
+ * provides work of pool of connections with database
+ * @author MasSword
+*/
 
 public class ConnectionPool implements ConPool{
 	private static ConnectionPool instance;
@@ -57,6 +63,12 @@ public class ConnectionPool implements ConPool{
         }
     }
     
+	/**
+     * Method returns ConnectionPool object
+     * if it is has not created, method creates it 
+     * @return ConnectionPool object
+     */
+    
     public static ConnectionPool getInstance() throws ConnectionPoolException{
     	ConnectionPool localInstance = instance;
 		if (localInstance == null) {
@@ -70,6 +82,10 @@ public class ConnectionPool implements ConPool{
 		}
 		return localInstance;
     }
+    
+	/**
+     * Method initializes parameters of ConnectionPool object 
+     */
 
     public void initPoolData() throws ConnectionPoolException {
         try {
@@ -99,6 +115,11 @@ public class ConnectionPool implements ConPool{
 		closeConnectionsQueue(connectionQueue);
     }
 
+	/**
+     * Method returns one Connection object from pool
+     * @return Connection object
+     */
+    
     public Connection takeConnection() throws ConnectionPoolException{
         Connection connection = null;
         try {
@@ -110,11 +131,23 @@ public class ConnectionPool implements ConPool{
         }
         return connection;
     }
+	/**
+     * This method gets as a parameter object of class Connection
+     * and method returns it to pool of connections
+     * @parameter Connection con
+     */
     public void returnConnection(Connection con) throws ConnectionPoolException{
     		connectionQueue.add(con);
             givenAwayConQueue.remove(con);
     }
 
+	/**
+     * This method closes connection with con, st, rs
+     * @parameter Connection con
+     * @parameter Statement st
+     * @parameter ResultSet rs
+     */
+    
     public void closeConnection(Connection con, Statement st, ResultSet rs) throws ConnectionPoolException {
         try {
             con.close();
@@ -136,6 +169,12 @@ public class ConnectionPool implements ConPool{
         }
     }
 
+	/**
+     * This method closes connection with con, st
+     * @parameter Connection con
+     * @parameter Statement st
+     */
+    
     public void closeConnection(Connection con, Statement st) throws ConnectionPoolException {
         try {
             con.close();
@@ -150,6 +189,8 @@ public class ConnectionPool implements ConPool{
         	throw new ConnectionPoolException("Error connection to the data source", ex);
         }
     }
+    
+    //Method closes connections (objects of PooledConnection class) in BlockingQueue
 
     private void closeConnectionsQueue(BlockingQueue<Connection> queue) throws ConnectionPoolException {
         try{
@@ -167,6 +208,10 @@ public class ConnectionPool implements ConPool{
 
     }
 
+    // PooledConnection.java - internal class
+    // Class implemented interface Connection
+    // provides connection with database
+    
     private class PooledConnection implements Connection {
         private Connection connection;
 
@@ -179,6 +224,8 @@ public class ConnectionPool implements ConPool{
             connection.close();
         }
 
+      //Method closes connection (objects of Connection class) in Queues
+        
         @Override
         public void close() throws SQLException {
             if (connection.isClosed()) {

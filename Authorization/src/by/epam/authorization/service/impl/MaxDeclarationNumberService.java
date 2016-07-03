@@ -7,7 +7,18 @@ import by.epam.authorization.dao.conpool.exception.ConnectionPoolException;
 import by.epam.authorization.service.InfService;
 import by.epam.authorization.service.exception.ServiceException;
 
+/**
+ * MaxDeclarationNumberService.java
+ * Class that provides 	definition of current max number of declarations
+ * @author MasSword
+ */
+
 public class MaxDeclarationNumberService implements InfService{
+	
+	/**
+     * Method definition current max number of declarations in service and returns it
+     * @return String instance
+     */
 	
 	@Override
 	public String maxDeclarationNumberRequest() throws ServiceException {
@@ -17,7 +28,7 @@ public class MaxDeclarationNumberService implements InfService{
 				return maxDeclNumber;
 			}
 		catch (ConnectionPoolException e) {
-			throw new ServiceException("Something going wrong");
+			throw new ServiceException("unable to return a max declaration's number", e);
 		}	
 	}
 

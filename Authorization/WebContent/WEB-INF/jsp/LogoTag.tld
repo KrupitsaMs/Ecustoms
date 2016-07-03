@@ -9,7 +9,7 @@
 
 	<tag>
 		<name>img</name>
-		<tag-class>by.epam.authorization.service.tag.LogoTag</tag-class>
+		<tag-class>resources.tag.LogoTag</tag-class>
 		<body-content>empty</body-content>
 		<description>This tag is for displaying images</description>
 		<attribute>

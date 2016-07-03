@@ -1,5 +1,13 @@
 package by.epam.authorization.entity;
 
+/**
+ * Good.java
+ * Class defines customs declaration's good entity with it's parameters
+ * it's declaration number, good's number, Customs tariff Code, good's name, good's value
+ * currency of invoice, good's origin
+ * @author MasSword
+ */
+
 public class Good {
   private String declarationNumber;	
   private String number;
@@ -26,62 +34,137 @@ public class Good {
 	  this.origin=origin;
   }
 
+	/**
+   * Method-getter
+   * @return String declarationNumber
+   */
+  
   public String getDeclarationNumber() {
 	return declarationNumber;
   }
 
+	/**
+   * Method-setter
+   * @parameter String declarationNumber
+   */
+  
   public void setDeclarationNumber(String declarationNumber) {
 	this.declarationNumber = declarationNumber;
   }
 
+	/**
+   * Method-getter
+   * @return String number
+   */
+  
   public String getNumber() {
 	return number;
   }
 
+	/**
+   * Method-setter
+   * @parameter String number
+   */
+  
   public void setNumber(String number) {
 	this.number = number;
   }
 
+	/**
+   * Method-getter
+   * @return String tariffCode
+   */
+  
   public String getTariffCode() {
 	return tariffCode;
   }
 
+	/**
+   * Method-setter
+   * @parameter String tariffCode
+   */
+  
   public void setTariffCode(String tariffCode) {
 	this.tariffCode = tariffCode;
   }
 
+	/**
+   * Method-getter
+   * @return String name
+   */
+  
   public String getName() {
 	return name;
   }
 
+	/**
+   * Method-setter
+   * @parameter String name
+   */
+  
   public void setName(String name) {
 	this.name = name;
   }
 
+	/**
+   * Method-getter
+   * @return String value
+   */
+  
   public String getValue() {
 	return value;
   }
 
+	/**
+   * Method-setter
+   * @parameter String value
+   */
+  
   public void setValue(String value) {
 	this.value = value;
   }
 
+	/**
+   * Method-getter
+   * @return String currency
+   */
+  
   public String getCurrency() {
 	return currency;
   }
 
+	/**
+   * Method-setter
+   * @parameter String currency
+   */
+  
   public void setCurrency(String currency) {
 	this.currency = currency;
   }
 
+	/**
+   * Method-getter
+   * @return String origin
+   */
+  
   public String getOrigin() {
 	return origin;
   }
 
+	/**
+   * Method-setter
+   * @parameter String origin
+   */
+  
   public void setOrigin(String origin) {
 	this.origin = origin;
   }
 
+	/**
+   * Returns a hash code value for the object.
+   * @return int hash code
+   */
+  
   @Override
   public int hashCode() {
 	final int prime = 31;
@@ -98,6 +181,11 @@ public class Good {
 	return result;
   }
 
+	/**
+   * Indicates whether some other object is "equal to" this one.
+   * @return boolean equality
+   */
+  
   @Override
   public boolean equals(Object obj) {
 	if (this == obj)

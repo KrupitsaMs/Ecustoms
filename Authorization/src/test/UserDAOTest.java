@@ -17,15 +17,30 @@ import by.epam.authorization.dao.conpool.exception.ConnectionPoolException;
 import by.epam.authorization.dao.impl.UserDAO;
 import by.epam.authorization.entity.User;
 
+/**
+ * UserDAOTest.java
+ * Class provides testing of UserDAO.java
+ * @author MasSword
+ */
+
 public class UserDAOTest {
 	private static UserDAO userDAO;
 	private Logger LOG = LogManager.getLogger(HttpServlet.class.getName());
+	
+	/**
+     * Method initializes UserDAO userDAO
+     */
 	
 	@BeforeClass
 	public static void initUserDAO(){
 		userDAO = (UserDAO) DAOFactory.getInstance().getDAOUser(DAOName.USER);
 	}
 
+	/**
+     * Check if method checkUser returns message "Confirmed"
+     * when it get as a parameter "Epam", "Epam"
+     */
+	
 	@Test
 	public void checkUserTest() {
 		try{
@@ -38,6 +53,10 @@ public class UserDAOTest {
 		}
 		
 	}
+	
+	/**
+     * Check if method adminAddNewUser successfully creates new User in Service
+     */
 	
 	@Test
 	public void adminAddNewUserTest() {
@@ -60,6 +79,10 @@ public class UserDAOTest {
 		
 	}
 	
+	/**
+     * Check if method addNewUserTest successfully creates new User in Service
+     */
+	
 	@Test
 	public void addNewUserTest() {
 		try{
@@ -78,6 +101,10 @@ public class UserDAOTest {
 		}
 		
 	}
+	
+	/**
+     * Check if method getUserList successfully returns list of all Users in service
+     */
 	
 	@Test
 	public void getUserListTest() {

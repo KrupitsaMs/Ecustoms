@@ -34,6 +34,14 @@ import by.epam.authorization.command.impl.SubmitNewDeclarationCommand;
 import by.epam.authorization.command.impl.UserNewDeclarationCommand;
 import by.epam.authorization.command.impl.UserPageCommand;
 
+/**
+ * CommandHelper.java
+ * It's class-factory
+ * that generates objects that implemented interface command
+ * It contains method execute
+ * @author MasSword
+ */
+
 public final class CommandHelper {
 	private static CommandHelper  instance;
 	private Map<CommandName, Command> commands = new ConcurrentHashMap<>();
@@ -70,6 +78,12 @@ public final class CommandHelper {
 		commands.put(CommandName.NO_SUCH_COMMAND, new NoSuchCommand());
 	}
 	
+	/**
+     * Method returns CommandHelper object
+     * if it is not created, method creates it 
+     * @return CommandHelper object
+     */
+	
 	public static CommandHelper getCommandHelperInstance(){
 		CommandHelper localInstance = instance;
 		if (localInstance == null) {
@@ -82,6 +96,13 @@ public final class CommandHelper {
 		}
 		return instance;
 	}
+	
+	/**
+     * Method get String object, processes it, and returns
+     * suitable object of Command.class
+     * @param String commandName
+     * @return object of Command.class
+     */
 	
 	public Command getCommand(String commandName){
 		Command command = null;

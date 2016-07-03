@@ -56,7 +56,7 @@
 	        </form>
           </div>
           <div id="content">
-			<h3>${choosed_declaration_failed}<h3/>
+			<h3>${choosed_declaration_failed}</h3>
 		  </div>
           <div id="rightcol">
 		    <h3 id="user_inf">${organization_name} <c:out value="${sessionScope.login.organizationName}"/></h3>

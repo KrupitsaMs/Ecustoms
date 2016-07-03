@@ -11,6 +11,13 @@ import by.epam.authorization.dao.conpool.exception.ConnectionPoolException;
 import by.epam.authorization.dao.conpool.impl.ConnectionPool;
 import by.epam.authorization.entity.User;
 
+/**
+ * UserDAO.java
+ * Class implemented interface DAOUser
+ * Provides operations in Database and with objects of User.java
+ * @author MasSword
+ */
+
 public class UserDAO implements DAOUser{
 	private final static String SQL_LOGINING = "SELECT * FROM ecustoms.users WHERE Login = ? AND Password = ? AND Confirmation = 'confirmed'";
 	private final static String SQL_LOGIN_CHECK = "SELECT * FROM ecustoms.users WHERE Login = ?";
@@ -21,8 +28,15 @@ public class UserDAO implements DAOUser{
 	private final static String SQL_USER_LIST = "SELECT * FROM ecustoms.users";
 	private final static String SQL_USER_UPDATE = "UPDATE ecustoms.users set Confirmation = ?  WHERE UTN = ?";
 	private final static String SQL_REMOVE_USER = "DELETE FROM ecustoms.users WHERE Login = ?";
-	
 	private final static String STATUS = "confirmed";
+	
+	/**
+     * Method checks if user with parameter login
+     * is situated in database.
+     * If it's true, method returns User.java object
+     * @param String login, String password
+     * @return User
+     */
 	
 	@Override
 	 public User checkUser(String login, String password) throws ConnectionPoolException{
@@ -50,7 +64,7 @@ public class UserDAO implements DAOUser{
 					return null;
 				}
 			} catch (SQLException ex){
-	            throw new ConnectionPoolException("SQL exception in userDao", ex);
+	            throw new ConnectionPoolException("unable to check a user", ex);
 			} finally{
 				try{
 					if(ps!=null){
@@ -65,6 +79,13 @@ public class UserDAO implements DAOUser{
 				
 			}	
 	 }
+	
+	/**
+     * Method adds new User in Database
+     * @param String login, String password, String utn, String organizationName, String address, String mail
+     * @return User
+     */
+	
 	@Override
 	 public User addNewUser(String login, String password, String utn,
 				String organizationName, String address, String mail) throws ConnectionPoolException{
@@ -93,7 +114,7 @@ public class UserDAO implements DAOUser{
 				return new User(login);
 				}
 			} catch (SQLException ex){
-	            throw new ConnectionPoolException("SQL exception in userDao", ex);
+	            throw new ConnectionPoolException("unable to add the user in database", ex);
 			} finally{
 				try{
 					if(ps!=null){
@@ -110,6 +131,12 @@ public class UserDAO implements DAOUser{
 		        }
 			}
 	 }
+	
+	/**
+     * Method return list of all user in DataBase
+     * @return ArrayList<User>
+     */
+	
 	@Override
 	public ArrayList<User> getUserList() throws ConnectionPoolException {
 		Connection connection = null;
@@ -135,7 +162,7 @@ public class UserDAO implements DAOUser{
 			}
 			return userList;
 		} catch (SQLException ex){
-            throw new ConnectionPoolException("SQL exception in userDao", ex);
+            throw new ConnectionPoolException("unable to return list of users", ex);
 		} finally{
 			try{
 				if(ps!=null){
@@ -149,6 +176,12 @@ public class UserDAO implements DAOUser{
 	        }
 	     }
 	}
+	
+	/**
+     * Method changes status of user's account.
+     * @param User updatedUser, String status
+     */
+	
 	@Override
 	public void userStatusUpdate(User updatedUser, String status) throws ConnectionPoolException {
 		Connection connection = null;
@@ -162,7 +195,7 @@ public class UserDAO implements DAOUser{
 			ps.setString(2, UTN);
 			ps.executeUpdate();
 		} catch (SQLException ex){
-            throw new ConnectionPoolException("SQL exception in userDao", ex);
+            throw new ConnectionPoolException("unable to change the status of the user", ex);
 		} finally{
 			try{
 				if(ps!=null){
@@ -173,6 +206,14 @@ public class UserDAO implements DAOUser{
 	        }
 	     }
 	}
+	
+	/**
+     * Method adds new User in Database
+     * with  the possibility to determine the User's status
+     * @param String login, String password, String role, String utn, String organizationName, String address, String mail
+     * @return User
+     */
+	
 	@Override
 	public User adminAddNewUser(String login, String password, String role, String utn, String organizationName, String address, String mail) throws ConnectionPoolException {
 		Connection connection = null;
@@ -205,7 +246,7 @@ public class UserDAO implements DAOUser{
 				return user;
 				}
 			} catch (SQLException ex){
-	            throw new ConnectionPoolException("SQL exception in userDao", ex);
+	            throw new ConnectionPoolException("unable to add the user", ex);
 			} finally{
 				try{
 					if(ps!=null){
@@ -223,6 +264,12 @@ public class UserDAO implements DAOUser{
 			}
 	}
 	
+	/**
+     * Method removes user's account from Database
+     * @param String userLogin
+     * @return User
+     */
+	
 	public void removeUser (String userLogin) throws ConnectionPoolException{
 		Connection connection = null;
 		PreparedStatement ps = null;
@@ -234,7 +281,7 @@ public class UserDAO implements DAOUser{
 			ps.executeUpdate();
 			con.returnConnection(connection);
 		} catch (SQLException ex){
-            throw new ConnectionPoolException("SQL exception in userDao", ex);
+            throw new ConnectionPoolException("unable to remove the user from database", ex);
 		} finally{
 			try {
 			if(ps!=null){

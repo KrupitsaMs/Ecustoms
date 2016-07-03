@@ -3,18 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		 version="2.5">
-  <display-name>Library</display-name>
+  <display-name>E-Cust</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
   <servlet>
-    <description></description>
     <display-name>Controller</display-name>
     <servlet-name>Controller</servlet-name>
     <servlet-class>by.epam.authorization.controller.Controller</servlet-class>
@@ -23,6 +17,47 @@
   <servlet-mapping>
     <servlet-name>Controller</servlet-name>
     <url-pattern>/Controller</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+   <servlet-name>About</servlet-name>
+   <jsp-file>/WEB-INF/jsp/about.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+   <servlet-name>About</servlet-name>
+   <url-pattern>/About</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+   <servlet-name>EX_Check</servlet-name>
+   <jsp-file>/WEB-INF/jsp/ex_declaration_check.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+   <servlet-name>EX_Check</servlet-name>
+   <url-pattern>/EX_Check</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+   <servlet-name>Registration</servlet-name>
+   <jsp-file>/WEB-INF/jsp/registration.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+   <servlet-name>Registration</servlet-name>
+   <url-pattern>/Registration</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+   <servlet-name>Account_recovery</servlet-name>
+   <jsp-file>/WEB-INF/jsp/account_recovery.jsp</jsp-file>
+  </servlet>
+
+  <servlet-mapping>
+   <servlet-name>Account_recovery</servlet-name>
+   <url-pattern>/Account_recovery</url-pattern>
   </servlet-mapping>
   
    <listener>
@@ -52,5 +87,4 @@
         <filter-name>AccessFilter</filter-name>
         <url-pattern>/Controller</url-pattern>
     </filter-mapping>
-	
 </web-app>

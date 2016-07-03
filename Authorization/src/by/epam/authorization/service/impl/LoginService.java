@@ -10,9 +10,23 @@ import by.epam.authorization.entity.User;
 import by.epam.authorization.service.UserService;
 import by.epam.authorization.service.exception.ServiceException;
 
+/**
+ * LoginService.java
+ * Class on Service level which provides operations with User.java's objects except registration of new users. 
+ * @author MasSword
+ */
+
 public class LoginService implements UserService{
 	private final static String LOGIN_CHECK = "[A-Za-z\\d]*";
 
+	/**
+     * Method checks if user with parameter login
+     * is situated in database.
+     * If it's true, method returns User.java object
+     * @param String login, String password
+     * @return User.java's object
+     */
+	
 	@Override
 	public User userEnquery(String login, String password) throws ServiceException {
 		try {
@@ -23,9 +37,17 @@ public class LoginService implements UserService{
 		User newUser =  check.checkUser(login, password);
 			return newUser;
 		} catch (ConnectionPoolException e) {
-			throw new ServiceException("Something going wrong");
+			throw new ServiceException("unable to check the login", e);
 		}
 	}
+	
+	/**
+     * Method analyzes if parameters is not null
+     * if one of the parameters is null, method returns false,
+     * if one of the parameters is not null, method returns true
+     * @param String login, String password
+     * @return boolean instance
+     */
 	
 	private static boolean loginValidator(String login, String password){
 		if(login.isEmpty() || !(login.matches(LOGIN_CHECK))){
@@ -37,6 +59,11 @@ public class LoginService implements UserService{
 		return true;
 	}
 	
+	/**
+     * Method return list of all user in DataBase
+     * @return ArrayList<User>
+     */
+	
 	@Override
 	public ArrayList<User> userEnquery() throws ServiceException {
 		try{
@@ -44,7 +71,7 @@ public class LoginService implements UserService{
 			ArrayList<User> userList = check.getUserList();
 			return userList;
 		}  catch (ConnectionPoolException e) {
-			throw new ServiceException("Something going wrong");
+			throw new ServiceException("unable to return the list of declaration", e);
 		}
 
 	}
